@@ -1,33 +1,42 @@
-#include<iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
-int Binar_search(int arr[],int low,int high,int key)
+void jump(int arr[],int n,int key)
 {
-    static int count=0;
-    count++;
-    int mid=(high+low)/2;
-    if(low>high)
-    return -1
-    if(arr[mid]==key)
-    {
-        printf("total comparison =",count);
-        return mid;
+    int start=0,comp=0,flag=0;
+    int end=sqrt(n);
+    while(arr[end]<=key && end<n)
+    {   comp++;
+        start=end;
+        end+=sqrt(n);
+        if(end>n-1) end=n;
     }
-    if(arr[mid]>key)
+    for(int i=start;i<end;i++)
     {
-
-        Binary_search(arr,0,mid-1,key);
+        if(arr[i]==key)
+        {
+          flag=true;
+          break;
+        }
     }
-    if(arr[mid]<key)
-    {
-        Binary_search(arr,mid+1,high,key);
-    }
-}
-void inputarray()
-{
-
+    if(flag)cout<<"Present "<<comp<<endl;
+    else cout<<"Not present"<<endl;
+   
 }
 int main()
 {
+    int n;
+    cin>>n;
+    while(n--)
+    {
+        int size;
+        cin>>size;
+        int arr[size];
+        for(int i=0;i<size;i++)cin>>arr[i];
+        int key;
+        cin>>key;
+        jump(arr,size,key);
+    }
 
-
+    return 0;
 }
